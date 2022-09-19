@@ -7,10 +7,11 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
-      assets: resolve("./src/assets"),
       components: resolve("./src/components"),
+      hooks: resolve("./src/hooks"),
       pages: resolve("./src/pages"),
       style: resolve("./src/style"),
+      utils: resolve("./src/utils"),
     },
   },
 });

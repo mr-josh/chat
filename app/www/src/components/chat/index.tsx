@@ -15,7 +15,17 @@ const Chat = (props: { maxHistory?: number }) => {
       };
       message: string;
     }[]
-  >([]);
+  >([
+    {
+      user: {
+        name: "Welcome Bot",
+        color: "#92f4f4",
+        subscriber: false,
+        moderator: false,
+      },
+      message: "Welcome to the chat!",
+    },
+  ]);
 
   useEffect(() => {
     const client = new Client({
@@ -28,7 +38,7 @@ const Chat = (props: { maxHistory?: number }) => {
         {
           user: {
             name: tags["display-name"] || tags.username || "unknown",
-            color: "#f4bedb",
+            color: tags.color || "#e5a040",
             subscriber: tags.subscriber || false,
             moderator: tags.mod || false,
           },
@@ -36,7 +46,8 @@ const Chat = (props: { maxHistory?: number }) => {
         },
       ]);
       setTimeout(() => {
-        window.scrollTo(0, document.body.scrollHeight);
+        const chat = document.getElementById("chat")!;
+        chat.scrollTo(0, chat.scrollHeight);
       }, 100);
     });
 
@@ -61,7 +72,7 @@ const Chat = (props: { maxHistory?: number }) => {
   }, []);
 
   return (
-    <div className={style.chat}>
+    <div id="chat" className={style.chat}>
       {chat.map((chat, i) => (
         <Message
           key={i}
@@ -70,6 +81,24 @@ const Chat = (props: { maxHistory?: number }) => {
           message={chat.message}
         ></Message>
       ))}
+      {/* <button
+        onClick={() =>
+          setChat((chat) => [
+            ...chat.slice(-Math.abs(props.maxHistory || 1000)),
+            {
+              user: {
+                name: "Test",
+                color: "#e5a040",
+                subscriber: false,
+                moderator: false,
+              },
+              message: "Testing",
+            },
+          ])
+        }
+      >
+        Test
+      </button> */}
     </div>
   );
 };

@@ -4,12 +4,13 @@
   gap: .5rem;
   padding: .5rem;
   height: 100%; /* change to magic */
-  // overflow-y: scroll;
+  overflow-y: scroll;
   scrollbar-width: none;
+  background-color: #2a2a2a;
 }
 
 .message {
   padding: .25rem 1.5rem;
-  color: black;
+  color: white;
   border-radius: .1rem;
 }
