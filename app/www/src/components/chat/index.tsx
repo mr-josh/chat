@@ -1,22 +1,14 @@
 import { useEffect, useState } from "react";
 
-import { Client } from "tmi.js";
 import Message from "./message";
+import { MessageProps } from "types/chat";
 import style from "./style.module.scss";
+import useTwitchChat from "hooks/twitch";
 
 const Chat = (props: { maxHistory?: number }) => {
-  const [chat, setChat] = useState<
+  const [chat, setChat] = useState<MessageProps[]>([
     {
-      user: {
-        name: string;
-        color: string;
-        subscriber: boolean;
-        moderator: boolean;
-      };
-      message: string;
-    }[]
-  >([
-    {
+      source: "system",
       user: {
         name: "Welcome Bot",
         color: "#92f4f4",
@@ -27,65 +19,26 @@ const Chat = (props: { maxHistory?: number }) => {
     },
   ]);
 
+  useTwitchChat((message) => {
+    setChat((c) => [...c.slice(-Math.abs(props.maxHistory || 1000)), message]);
+  });
+
   useEffect(() => {
-    const client = new Client({
-      channels: ["dotmrjosh"],
-    });
-
-    client.addListener("message", (channel, tags, message, self) => {
-      setChat((chat) => [
-        ...chat.slice(-Math.abs(props.maxHistory || 1000)),
-        {
-          user: {
-            name: tags["display-name"] || tags.username || "unknown",
-            color: tags.color || "#e5a040",
-            subscriber: tags.subscriber || false,
-            moderator: tags.mod || false,
-          },
-          message,
-        },
-      ]);
-      setTimeout(() => {
-        const chat = document.getElementById("chat")!;
-        chat.scrollTo(0, chat.scrollHeight);
-      }, 100);
-    });
-
-    const connect = async () => {
-      console.log("Connected");
-      await client.connect();
-    };
-
-    let attempt = connect();
-
-    return () => {
-      const disconnect = async () => {
-        await attempt;
-
-        console.log("Disconnected");
-        client.removeAllListeners();
-        await client.disconnect();
-      };
-
-      disconnect();
-    };
-  }, []);
+    const chat = document.getElementById("chat")!;
+    chat.scrollTo(0, chat.scrollHeight);
+  }, [chat]);
 
   return (
     <div id="chat" className={style.chat}>
       {chat.map((chat, i) => (
-        <Message
-          key={i}
-          displayName={chat.user.name}
-          color={chat.user.color}
-          message={chat.message}
-        ></Message>
+        <Message key={i} {...chat} />
       ))}
-      {/* <button
+      <button
         onClick={() =>
           setChat((chat) => [
             ...chat.slice(-Math.abs(props.maxHistory || 1000)),
             {
+              source: "system",
               user: {
                 name: "Test",
                 color: "#e5a040",
@@ -98,7 +51,7 @@ const Chat = (props: { maxHistory?: number }) => {
         }
       >
         Test
-      </button> */}
+      </button>
     </div>
   );
 };

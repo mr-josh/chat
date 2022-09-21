@@ -11,6 +11,7 @@ export default defineConfig({
       hooks: resolve("./src/hooks"),
       pages: resolve("./src/pages"),
       style: resolve("./src/style"),
+      types: resolve("./src/types"),
       utils: resolve("./src/utils"),
     },
   },
