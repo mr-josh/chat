@@ -7,10 +7,36 @@
   overflow-y: scroll;
   scrollbar-width: none;
   background-color: #2a2a2a;
+  border-radius: 1rem;
+}
+
+.chat::-webkit-scrollbar {
+  display: none;
 }
 
 .message {
+  display: flex;
   padding: .25rem 1.5rem;
   color: white;
   border-radius: .1rem;
+
+  & :global(.content) {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1ch;
+    align-items: center;
+
+    img {
+      aspect-ratio: 1;
+      width: 1rem;
+      border-radius: .25rem;
+    }
+  }
+
+  & :global(.content.emotes-only) {
+    img {
+      aspect-ratio: 1;
+      width: 3rem;
+    }
+  }
 }

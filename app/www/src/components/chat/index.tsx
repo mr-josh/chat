@@ -34,6 +34,10 @@ const Chat = (props: { maxHistory?: number }) => {
         <Message key={i} {...chat} />
       ))}
       <button
+        style={{
+          position: "absolute",
+          bottom: 0,
+        }}
         onClick={() =>
           setChat((chat) => [
             ...chat.slice(-Math.abs(props.maxHistory || 1000)),
@@ -45,7 +49,7 @@ const Chat = (props: { maxHistory?: number }) => {
                 subscriber: false,
                 moderator: false,
               },
-              message: "Testing",
+              message: "PepeHands",
             },
           ])
         }
