@@ -6,7 +6,7 @@
   height: 100%; /* change to magic */
   overflow-y: scroll;
   scrollbar-width: none;
-  background-color: #2a2a2a;
+  background-color: rgba(42, 42, 42, 0.9);
   border-radius: 1rem;
 }
 
@@ -24,6 +24,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: 1ch;
+    margin-left: 1ch;
     align-items: center;
 
     img {
