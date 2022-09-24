@@ -2,22 +2,28 @@ import { useEffect, useState } from "react";
 
 import Message from "./message";
 import { MessageProps } from "types/chat";
+import emotify from "./emotes";
 import style from "./style.module.scss";
 import useTwitchChat from "hooks/twitch";
+import useYouTubeChat from "hooks/youtube";
 
 const Chat = (props: { maxHistory?: number }) => {
   const [chat, setChat] = useState<MessageProps[]>([
     {
       source: "system",
       user: {
-        name: "Welcome Bot",
+        name: "Mr Chat",
         color: "#92f4f4",
         subscriber: false,
         moderator: false,
       },
-      message: "Welcome to the chat!",
+      message: emotify("Welcome to the chat!"),
     },
   ]);
+
+  useYouTubeChat((message) => {
+    setChat((c) => [...c.slice(-Math.abs(props.maxHistory || 1000)), message]);
+  });
 
   useTwitchChat((message) => {
     setChat((c) => [...c.slice(-Math.abs(props.maxHistory || 1000)), message]);
@@ -33,7 +39,7 @@ const Chat = (props: { maxHistory?: number }) => {
       {chat.map((chat, i) => (
         <Message key={i} {...chat} />
       ))}
-      <button
+      {/* <button
         style={{
           position: "absolute",
           bottom: 0,
@@ -55,7 +61,7 @@ const Chat = (props: { maxHistory?: number }) => {
         }
       >
         Test
-      </button>
+      </button> */}
     </div>
   );
 };

@@ -6,5 +6,5 @@ export interface MessageProps {
     subscriber: boolean;
     moderator: boolean;
   };
-  message: string;
+  message: JSX.Element;
 }

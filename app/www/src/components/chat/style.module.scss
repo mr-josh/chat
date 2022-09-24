@@ -15,16 +15,25 @@
 }
 
 .message {
+  position: relative;
   display: flex;
   padding: .25rem 1.5rem;
+  gap: 1ch;
   color: white;
   border-radius: .1rem;
+
+  > img {
+    position: absolute;
+    top: 0;
+    left: 1ch;
+    width: 1rem;
+    height: 1rem;
+  }
 
   & :global(.content) {
     display: flex;
     flex-wrap: wrap;
     gap: 1ch;
-    margin-left: 1ch;
     align-items: center;
 
     img {

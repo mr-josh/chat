@@ -1,5 +1,6 @@
 import { Client } from "tmi.js";
 import { MessageProps } from "types/chat";
+import emotify from "components/chat/emotes";
 import { useEffect } from "react";
 
 const useTwitchChat = (onMessage: (message: MessageProps) => void) => {
@@ -17,7 +18,7 @@ const useTwitchChat = (onMessage: (message: MessageProps) => void) => {
           subscriber: tags.subscriber || false,
           moderator: tags.mod || false,
         },
-        message,
+        message: emotify(message),
       });
     });
 

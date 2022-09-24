@@ -1,6 +1,7 @@
 import { MessageProps } from "types/chat";
 import computedColor from "utils/cssColor";
-import emotify from "hooks/emotes";
+import emotify from "./emotes";
+import sourceIcon from "./sources";
 import style from "./style.module.scss";
 
 const Message = (props: MessageProps) => {
@@ -10,10 +11,11 @@ const Message = (props: MessageProps) => {
 
   return (
     <div className={style.message}>
+      {sourceIcon(props.source)}
       <span className={style.displayName} style={{ color: color }}>
-        {props.user.name}
+        {props.user.name}:
       </span>
-      :{emotify(props.message)}
+      {props.message}
     </div>
   );
 };
