@@ -18,7 +18,7 @@ const useTwitchChat = (onMessage: (message: MessageProps) => void) => {
           subscriber: tags.subscriber || false,
           moderator: tags.mod || false,
         },
-        message: emotify(message),
+        message: emotify(message, tags.emotes),
       });
     });
 
