@@ -5,7 +5,6 @@ import { MessageProps } from "types/chat";
 import emotify from "./emotes";
 import style from "./style.module.scss";
 import useTwitchChat from "hooks/twitch";
-import useYouTubeChat from "hooks/youtube";
 
 const Chat = (props: { maxHistory?: number }) => {
   const [chat, setChat] = useState<MessageProps[]>([
@@ -20,10 +19,6 @@ const Chat = (props: { maxHistory?: number }) => {
       message: emotify("Welcome to the chat!"),
     },
   ]);
-
-  useYouTubeChat((message) => {
-    setChat((c) => [...c.slice(-Math.abs(props.maxHistory || 1000)), message]);
-  });
 
   useTwitchChat((message) => {
     setChat((c) => [...c.slice(-Math.abs(props.maxHistory || 1000)), message]);
