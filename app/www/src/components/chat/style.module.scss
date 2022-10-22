@@ -6,7 +6,7 @@
   height: 100%; /* change to magic */
   overflow-y: scroll;
   scrollbar-width: none;
-  background-color: rgba(42, 42, 42, 0.9);
+  background-color: rgba(0, 0, 0, .9);
   border-radius: 1rem;
 }
 
@@ -38,15 +38,8 @@
 
     img {
       aspect-ratio: 1;
-      width: 1rem;
+      width: 2rem;
       border-radius: .25rem;
-    }
-  }
-
-  & :global(.content.emotes-only) {
-    img {
-      aspect-ratio: 1;
-      width: 3rem;
     }
   }
 }
