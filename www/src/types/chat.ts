@@ -1,4 +1,5 @@
 export interface MessageProps {
+  id: string;
   source: string;
   user: {
     name: string;

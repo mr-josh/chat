@@ -3,7 +3,10 @@ import { MessageProps } from "types/chat";
 import emotify from "components/chat/emotes";
 import { useEffect } from "react";
 
-const useTwitchChat = (onMessage: (message: MessageProps) => void) => {
+const useTwitchChat = (
+  onMessage: (message: MessageProps) => void,
+  onDeleted?: (id: string) => void
+) => {
   useEffect(() => {
     const client = new Client({
       channels: ["dotmrjosh"],
@@ -11,6 +14,7 @@ const useTwitchChat = (onMessage: (message: MessageProps) => void) => {
 
     client.addListener("message", (channel, tags, message, self) => {
       onMessage({
+        id: tags.id!,
         source: "twitch",
         user: {
           name: tags["display-name"] || tags.username || "unknown",
@@ -21,6 +25,13 @@ const useTwitchChat = (onMessage: (message: MessageProps) => void) => {
         message: emotify(message, tags.emotes),
       });
     });
+
+    client.addListener(
+      "messagedeleted",
+      (channel, username, deletedMessage, userstate) => {
+        onDeleted && onDeleted(userstate["target-msg-id"]!);
+      }
+    );
 
     const connect = async () => {
       console.log("Connected");

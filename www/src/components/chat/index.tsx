@@ -9,6 +9,7 @@ import useTwitchChat from "hooks/twitch";
 const Chat = (props: { maxHistory?: number }) => {
   const [chat, setChat] = useState<MessageProps[]>([
     {
+      id: "sys-0",
       source: "system",
       user: {
         name: "Mr Chat",
@@ -20,9 +21,17 @@ const Chat = (props: { maxHistory?: number }) => {
     },
   ]);
 
-  useTwitchChat((message) => {
-    setChat((c) => [...c.slice(-Math.abs(props.maxHistory || 1000)), message]);
-  });
+  useTwitchChat(
+    (message) => {
+      setChat((c) => [
+        ...c.slice(-Math.abs(props.maxHistory || 1000)),
+        message,
+      ]);
+    },
+    (id) => {
+      setChat((c) => c.filter((m) => m.id !== id));
+    }
+  );
 
   useEffect(() => {
     const chat = document.getElementById("chat")!;

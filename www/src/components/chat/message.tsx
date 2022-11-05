@@ -1,7 +1,7 @@
 import { MessageProps } from "types/chat";
 import computedColor from "utils/cssColor";
 import { motion } from "framer-motion";
-import sourceIcon from "./sources";
+// import sourceIcon from "./sources";
 import style from "./style.module.scss";
 
 const Message = (props: MessageProps) => {
@@ -15,7 +15,7 @@ const Message = (props: MessageProps) => {
       animate={{ opacity: 1, x: 0 }}
       className={style.message}
     >
-      {sourceIcon(props.source)}
+      {/* {sourceIcon(props.source)} */}
       <span className={style.displayName} style={{ color: color }}>
         {props.user.name}:
       </span>
