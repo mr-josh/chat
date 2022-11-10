@@ -1,12 +1,12 @@
 .chat {
   display: flex;
   flex-direction: column;
+  justify-content: end;
   gap: .5rem;
   padding: .5rem;
   height: 100%; /* change to magic */
   overflow-y: scroll;
   scrollbar-width: none;
-  background-color: rgba(0, 0, 0, .9);
   border-radius: 1rem;
 }
 
@@ -19,7 +19,13 @@
   display: flex;
   padding: .25rem 1.5rem;
   gap: 1ch;
+  width: fit-content;
   color: white;
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  filter:
+    drop-shadow(0 0 0.05rem black)
+    drop-shadow(0 0 0.05rem black)
+    drop-shadow(0 0 0.05rem black);
   border-radius: .1rem;
 
   > img {
