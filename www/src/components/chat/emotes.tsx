@@ -12,7 +12,6 @@ let bttvCodes: string[];
 standardEmotes.betterttv.getGlobalEmotes().then((emotes) => {
   bttv = emotes!;
   bttvCodes = emotes!.map((e) => e.code!);
-  console.log(emotes);
 });
 
 const getUrl = (id: string) => {
