@@ -17,6 +17,7 @@
 .message {
   position: relative;
   display: flex;
+  flex-direction: column;
   padding: .25rem 1.5rem;
   gap: 1ch;
   width: fit-content;

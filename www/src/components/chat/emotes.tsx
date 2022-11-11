@@ -53,7 +53,9 @@ const emotify = (message: string, emotes: { [id: string]: string[] } = {}) => {
     message
   );
 
-  return <p className="content" dangerouslySetInnerHTML={{ __html: html }} />;
+  return (
+    <span className="content" dangerouslySetInnerHTML={{ __html: html }} />
+  );
 };
 
 export default emotify;
